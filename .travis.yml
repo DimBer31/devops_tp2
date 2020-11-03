@@ -10,10 +10,8 @@ script:
 
   # Publication des images
   - docker tag next-step myProject $user/myproject
-  - docker push $user/myProject
+  - docker push $user/myProject:next-step
 
 cache:
-directories:
-  - $HOME/.m2
 services:
   - docker
