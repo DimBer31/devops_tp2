@@ -25,6 +25,6 @@ script:
 
 addons:
 sonarcloud:
-organization: "devops-epf"
+organization: "DimBer31"
 token: "$SONARCLOUD_TOKEN"
 
