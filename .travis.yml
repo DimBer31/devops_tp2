@@ -1,3 +1,4 @@
 langage: java
 script:
   - mvn clean verify --file ./simple-api
+  - docker login -u $user -p $password
