@@ -1,6 +1,6 @@
 language: java
 script:
-  - cd ./simple-api/
+  - cd ./simple-api/pom.xml
   - mvn clean verify org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=dimitrikey
   - cd ..
 
