@@ -1,18 +1,22 @@
-langage: java
+language: java
 script:
-  - mvn clean verify --file ./simple-api
+  #Lance les tests
+  - mvn clean verify --file ./simple-api/pom.xml
 
-    #Connexion à Docker
+  #Connecte à Docker avec les variables d'env
+  #enregistrées au préalable sur Travis
   - docker login -u $user -p $password
 
-    #Build
+  #Build
   - docker build -t $user/myproject:database database
   - docker build -t $user/myproject:httpd httpd
   - docker build -t $user/myproject:simple-api simple-api
 
-  # Publication des images
-  - docker push $user/myproject:database
-  - docker push $user/myProject:httpd
-  - docker push $user/myProject:simple-api
+  #Ajoute nom:version
+  #  - docker tag mylittleproject $user/mylittleproject:1.0
 
+  #Push sur Docker hub
+  - docker push $user/myproject:database
+  - docker push $user/myproject:httpd
+  - docker push $user/myproject:simple-api
 
