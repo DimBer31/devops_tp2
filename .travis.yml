@@ -5,7 +5,7 @@ script:
   - cd ..
 
   # Connexion à Docker
-  - docker login -u $user -p $pwd
+  - docker login -u $user -p $password
 
   # Build
   - docker build -t $user/myproject:database database
