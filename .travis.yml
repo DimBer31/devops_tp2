@@ -1,30 +1,31 @@
 language: java
 script:
-  #Lance les tests
-  - mvn clean verify --file ./simple-api/pom.xml
+  - cd ./simple-api/
+  - mvn clean verify org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=dimitrikey
+  - cd ..
 
-  #Connecte à Docker avec les variables d'env
-  #enregistrées au préalable sur Travis
-  - docker login -u $user -p $password
+  # Connexion à Docker
+  - docker login -u $user -p $pwd
 
-  #Build
+  # Build
   - docker build -t $user/myproject:database database
   - docker build -t $user/myproject:httpd httpd
   - docker build -t $user/myproject:simple-api simple-api
 
-
-  #Push sur Docker hub
+  # Publication des images
   - docker push $user/myproject:database
   - docker push $user/myproject:httpd
   - docker push $user/myproject:simple-api
 
+cache:
+  directories:
+    - $HOME/.m2
 
-
-  - mvn clean verify org.jacoco:jacoco-maven-plugin:prepare-agent install
-  sonar:sonar -Dsonar.projectKey=dimitrikey
+services:
+  - docker
 
 addons:
-sonarcloud:
-organization: "devopsdborga"
-token: "$SONARCLOUD_TOKEN"
+  sonarcloud:
+    organization: "devopsdborga"
+    token: $SONARCLOUD_TOKEN
 
