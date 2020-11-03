@@ -1,0 +1,3 @@
+langage: java
+script:
+  - #TODO: test and build your application with maven
