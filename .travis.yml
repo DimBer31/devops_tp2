@@ -1,4 +1,19 @@
 langage: java
 script:
   - mvn clean verify --file ./simple-api
+
+    #Connexion à Docker
   - docker login -u $user -p $password
+
+    #Build
+  - docker-compose up
+
+  # Publication des images
+  - docker tag next-step myProject $user/myproject
+  - docker push $user/myProject
+
+cache:
+directories:
+  - $HOME/.m2
+services:
+  - docker
