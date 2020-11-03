@@ -12,11 +12,19 @@ script:
   - docker build -t $user/myproject:httpd httpd
   - docker build -t $user/myproject:simple-api simple-api
 
-  #Ajoute nom:version
-  #  - docker tag mylittleproject $user/mylittleproject:1.0
 
   #Push sur Docker hub
   - docker push $user/myproject:database
   - docker push $user/myproject:httpd
   - docker push $user/myproject:simple-api
+
+
+
+  - mvn clean verify org.jacoco:jacoco-maven-plugin:prepare-agent install
+  sonar:sonar -Dsonar.projectKey=devops-2020
+
+addons:
+sonarcloud:
+organization: "devops-epf"
+token: "$SONARCLOUD_TOKEN"
 
