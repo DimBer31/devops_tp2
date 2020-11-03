@@ -6,12 +6,13 @@ script:
   - docker login -u $user -p $password
 
     #Build
-  - docker-compose up
+  - docker build -t $user/myproject:database database
+  - docker build -t $user/myproject:httpd httpd
+  - docker build -t $user/myproject:simple-api simple-api
 
   # Publication des images
-  - docker tag next-step myProject $user/myproject
-  - docker push $user/myProject:next-step
+  - docker push $user/myproject:database
+  - docker push $user/myProject:httpd
+  - docker push $user/myProject:simple-api
 
-cache:
-services:
-  - docker
+
