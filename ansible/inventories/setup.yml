@@ -1,7 +1,9 @@
 all:
   vars:
+    db_user: usr
+    db_password: pwd
     ansible_user: centos
-    ansible_ssh_private_key_file: ../../cle_tp3/id_rsa
+    ansible_ssh_private_key_file: ~/devops_tp2/cle_tp3/id_rsa
   children:
-    prod:
-      hosts: dimitri.bernadine.takima.cloud
+     prod:
+       hosts: dimitri.bernadine.takima.cloud

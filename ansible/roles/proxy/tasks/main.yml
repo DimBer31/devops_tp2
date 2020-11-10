@@ -1,0 +1,10 @@
+---
+- name: Proxy container
+  docker_container:
+    name: reverse_proxy
+    image: bernadinedimitri/myproject:httpd
+    state: started
+    networks: 
+      - name: app-network
+    ports:
+      - "80:80"  
